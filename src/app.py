@@ -7,7 +7,7 @@ import streamlit as st
 from dotenv import load_dotenv
 from src.vector_store import get_vector_store
 from src.refusal_handler import is_advisory_query, get_refusal_response
-import openai
+from groq import Groq
 
 load_dotenv()
 
@@ -80,7 +80,7 @@ if query:
             scraped_at = results['metadatas'][0][0]['scraped_at'] if results['metadatas'][0] else "N/A"
             
             # 4. LLM Generation
-            client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            client = Groq(api_key=os.getenv("GROQ_API_KEY"))
             
             system_prompt = (
                 "You are a factual Mutual Fund FAQ assistant. Answer ONLY based on the provided context. "
@@ -90,7 +90,7 @@ if query:
             prompt = f"Context:\n{context}\n\nQuestion: {query}"
             
             completion = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="llama3-8b-8192",
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": prompt}
