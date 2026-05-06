@@ -47,6 +47,6 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add data/raw/ data/fund_summary.json
+          git add data/raw/ data/fund_summary.json data/vector_db/
           git commit -m "chore: daily data refresh $(date +'%Y-%m-%d')" || echo "No changes to commit"
           git push
