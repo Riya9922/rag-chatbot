@@ -1,0 +1,67 @@
+[
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+        "fund_name": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
+        "url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+        "scraped_at": "2026-05-06T15:26:36.042354",
+        "source": "Groww.in",
+        "content_type": "official_public_data",
+        "nav": "1,447.93",
+        "min_sip": "500",
+        "fund_size": "14,615.19 Cr",
+        "expense_ratio": "1.11%",
+        "rating": "5"
+    },
+    {
+        "fund_name": "HDFC Flexi Cap Direct Plan Growth",
+        "url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+        "scraped_at": "2026-05-06T15:26:37.432398",
+        "source": "Groww.in",
+        "content_type": "official_public_data",
+        "nav": "2,136.67",
+        "min_sip": "100",
+        "fund_size": "91,334.91 Cr",
+        "expense_ratio": "0.67%",
+        "rating": "5"
+    },
+    {
+        "fund_name": "HDFC Focused Fund Direct Growth",
+        "url": "https://groww.in/mutual-funds/hdfc-focused-fund-direct-growth",
+        "scraped_at": "2026-05-06T15:26:36.064583",
+        "source": "Groww.in",
+        "content_type": "official_public_data",
+        "nav": "253.71",
+        "min_sip": "100",
+        "fund_size": "24,169.51 Cr",
+        "expense_ratio": "0.68%",
+        "rating": "5"
+    },
+    {
+        "fund_name": "HDFC Large Cap Fund Direct Growth",
+        "url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+        "scraped_at": "2026-05-06T15:26:37.289888",
+        "source": "Groww.in",
+        "content_type": "official_public_data",
+        "nav": "1,187.11",
+        "min_sip": "100",
+        "fund_size": "35,458.50 Cr",
+        "expense_ratio": "1.36%",
+        "rating": "4"
+    },
+    {
+        "fund_name": "HDFC Mid Cap Fund Direct Growth",
+        "url": "https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth",
+        "scraped_at": "2026-05-06T15:26:38.004686",
+        "source": "Groww.in",
+        "content_type": "official_public_data",
+        "nav": "218.75",
+        "min_sip": "100",
+        "fund_size": "85,357.92 Cr",
+        "expense_ratio": "0.80%",
+        "rating": "5"
+    }
+]

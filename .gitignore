@@ -1,31 +1,7 @@
-# Secrets
 .env
-
-# Environments
-.venv/
-env/
-venv/
-ENV/
-
-# Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
+logs/
 .pytest_cache/
-.coverage
-htmlcov/
-dist/
-build/
-*.egg-info/
-
-# Data
-data/raw/
-data/processed/*.parquet
-!data/processed/.gitkeep
-
-# IDEs
-.vscode/
-.idea/
-extensions/
-
+test_out.txt
+scratch/

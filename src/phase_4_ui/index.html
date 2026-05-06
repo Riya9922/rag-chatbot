@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDFC Fund Facts | AI Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0b10;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #3b82f6;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar Dashboard */
+        .sidebar {
+            width: 320px;
+            background: var(--glass-bg);
+            border-right: 1px solid var(--glass-border);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        h1 { font-family: 'Outfit', sans-serif; font-size: 20px; color: var(--accent-color); margin-bottom: 10px; }
+
+        .fund-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .fund-card:hover { background: rgba(59, 130, 246, 0.1); border-color: var(--accent-color); }
+
+        .fund-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .fund-nav { font-size: 18px; color: var(--success); font-family: 'Outfit', sans-serif; }
+
+        /* Main Chat Area */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at 50% 50%, #111827 0%, #0a0b10 100%);
+        }
+
+        .chat-header {
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid var(--success);
+        }
+
+        .messages {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .message { max-width: 70%; padding: 16px; border-radius: 16px; line-height: 1.5; position: relative; }
+        .user-msg { align-self: flex-end; background: var(--accent-color); color: white; border-bottom-right-radius: 4px; }
+        .bot-msg { align-self: flex-start; background: var(--glass-bg); border: 1px solid var(--glass-border); border-bottom-left-radius: 4px; }
+
+        .citation {
+            display: block;
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .footer-note { font-size: 10px; color: var(--text-secondary); margin-top: 8px; }
+
+        .input-area {
+            padding: 30px 40px;
+            background: rgba(10, 11, 16, 0.8);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .input-wrapper {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            display: flex;
+            padding: 8px 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-wrapper:focus-within { border-color: var(--accent-color); }
+
+        input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 12px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        button:hover { opacity: 0.9; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar with Quick Stats -->
+    <div class="sidebar">
+        <h1>Fund Monitor</h1>
+        <div id="fund-list">
+            <!-- Dynamically populated from fund_summary.json -->
+            <div class="fund-card">
+                <div class="fund-name">HDFC Mid Cap Fund</div>
+                <div class="fund-nav">₹219.61</div>
+                <div class="footer-note">Exp: 0.73%</div>
+            </div>
+            <div class="fund-card">
+                <div class="fund-name">HDFC Flexi Cap Fund</div>
+                <div class="fund-nav">₹2,152.11</div>
+                <div class="footer-note">Exp: 0.67%</div>
+            </div>
+        </div>
+        <div style="margin-top: auto; padding: 12px; font-size: 11px; color: var(--text-secondary);">
+            Factual Agent v1.0<br>Powered by Chroma Cloud
+        </div>
+    </div>
+
+    <!-- Main Chat Window -->
+    <div class="chat-container">
+        <div class="chat-header">
+            <div>
+                <div style="font-weight: 600;">HDFC Mutual Fund Assistant</div>
+                <div style="font-size: 12px; color: var(--text-secondary);">Strictly Factual & Information Only</div>
+            </div>
+            <div class="status-badge">Live Source Connected</div>
+        </div>
+
+        <div class="messages" id="chat-messages">
+            <div class="message bot-msg">
+                Hello! I am your factual assistant for HDFC Mutual Funds. I can provide the latest NAV, Expense Ratios, and Scheme details. How can I help you today?
+            </div>
+        </div>
+
+        <div class="input-area">
+            <div class="input-wrapper">
+                <input type="text" id="user-input" placeholder="Ask about NAV, Expense ratio, or Fund size..." onkeypress="handleKey(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const messagesContainer = document.getElementById('chat-messages');
+
+        function appendMessage(text, isUser, citation = null, date = null) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${isUser ? 'user-msg' : 'bot-msg'}`;
+            msgDiv.innerText = text;
+
+            if (citation) {
+                const link = document.createElement('a');
+                link.href = citation;
+                link.className = 'citation';
+                link.target = '_blank';
+                link.innerText = 'Source: Official Scheme Page ↗';
+                msgDiv.appendChild(link);
+            }
+
+            if (date) {
+                const footer = document.createElement('div');
+                footer.className = 'footer-note';
+                footer.innerText = `Last updated from sources: ${date}`;
+                msgDiv.appendChild(footer);
+            }
+
+            messagesContainer.appendChild(msgDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const query = input.value.trim();
+            if (!query) return;
+
+            appendMessage(query, true);
+            input.value = '';
+
+            // Loading state
+            const loadingMsg = document.createElement('div');
+            loadingMsg.className = 'message bot-msg';
+            loadingMsg.innerText = 'Fetching facts...';
+            messagesContainer.appendChild(loadingMsg);
+
+            try {
+                // Connect to our FastAPI backend
+                const response = await fetch('/query', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: query })
+                });
+                const data = await response.json();
+                
+                messagesContainer.removeChild(loadingMsg);
+                appendMessage(data.answer, false, data.source, data.last_updated);
+            } catch (err) {
+                messagesContainer.removeChild(loadingMsg);
+                appendMessage("Error: Could not connect to the assistant server.", false);
+            }
+        }
+
+        function handleKey(e) { if (e.key === 'Enter') sendMessage(); }
+    </script>
+</body>
+</html>

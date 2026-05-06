@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-pandas
-pyarrow
-groq
-pydantic
-pydantic-settings
-streamlit
-python-dotenv
