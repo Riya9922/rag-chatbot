@@ -26,6 +26,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from fastapi.responses import HTMLResponse
+
 class ChatRequest(BaseModel):
     query: str
 
@@ -33,6 +35,12 @@ class ChatResponse(BaseModel):
     response: str
     source_url: str = None
     scraped_at: str = None
+
+@app.get("/", response_class=HTMLResponse)
+def read_root():
+    html_path = os.path.join(os.path.dirname(__file__), "..", "public", "index.html")
+    with open(html_path, "r", encoding="utf-8") as f:
+        return f.read()
 
 @app.get("/api/health")
 def health_check():
