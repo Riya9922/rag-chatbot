@@ -1,11 +1,8 @@
 requests
 beautifulsoup4
 chromadb
-sentence-transformers
-streamlit
 schedule
 python-dotenv
-pandas
 markdownify
 groq
 fastapi

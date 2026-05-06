@@ -25,8 +25,8 @@ def get_vector_store():
     # Using local embedding function
     client = chromadb.PersistentClient(path=current_db_path)
     
-    # default embedding function is all-MiniLM-L6-v2
-    embedding_func = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+    # default embedding function is all-MiniLM-L6-v2 (using onnxruntime instead of heavy torch)
+    embedding_func = embedding_functions.DefaultEmbeddingFunction()
     
     collection = client.get_or_create_collection(
         name=COLLECTION_NAME,
