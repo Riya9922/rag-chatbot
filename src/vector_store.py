@@ -1,16 +1,29 @@
 import chromadb
 from chromadb.utils import embedding_functions
 import os
-
+import shutil
 DB_PATH = "data/vector_db"
 COLLECTION_NAME = "fund_facts"
 
 def get_vector_store():
-    if not os.path.exists(DB_PATH):
-        os.makedirs(DB_PATH)
+    # Vercel's serverless functions have a read-only filesystem except for /tmp
+    is_vercel = os.getenv("VERCEL") == "1"
+    current_db_path = DB_PATH
+    
+    if is_vercel:
+        tmp_db_path = "/tmp/vector_db"
+        if not os.path.exists(tmp_db_path):
+            if os.path.exists(DB_PATH):
+                shutil.copytree(DB_PATH, tmp_db_path)
+            else:
+                os.makedirs(tmp_db_path)
+        current_db_path = tmp_db_path
+    else:
+        if not os.path.exists(DB_PATH):
+            os.makedirs(DB_PATH)
     
     # Using local embedding function
-    client = chromadb.PersistentClient(path=DB_PATH)
+    client = chromadb.PersistentClient(path=current_db_path)
     
     # default embedding function is all-MiniLM-L6-v2
     embedding_func = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
