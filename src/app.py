@@ -1,5 +1,9 @@
-import streamlit as st
+import sys
 import os
+# Add the project root to the Python path so that 'src.*' imports work correctly
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+import streamlit as st
 from dotenv import load_dotenv
 from src.vector_store import get_vector_store
 from src.refusal_handler import is_advisory_query, get_refusal_response
